@@ -42,9 +42,10 @@ export async function PUT(request: Request) {
   try {
     await savePricesAsync(sanitized);
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { ok: false, error: "Impossible de sauvegarder." },
+      { ok: false, error: `Erreur : ${msg}` },
       { status: 500 },
     );
   }
