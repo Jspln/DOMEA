@@ -1,9 +1,9 @@
 import { Check, ArrowRight } from "lucide-react";
 import { services } from "@/lib/services";
-import { getPrices } from "@/lib/prices";
+import { getPricesAsync } from "@/lib/prices";
 
-export default function Services() {
-  const prices = getPrices();
+export default async function Services() {
+  const prices = await getPricesAsync();
   const servicesWithPrices = services.map((s) => ({
     ...s,
     priceFrom: prices[s.id] ?? s.priceFrom,
