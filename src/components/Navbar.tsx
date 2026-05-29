@@ -69,7 +69,8 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header
+    <>
+      <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         solid
           ? "bg-white/95 backdrop-blur-xl border-b border-orange-100/60 shadow-sm"
@@ -135,10 +136,11 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+      </header>
 
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed inset-x-0 top-24 bottom-0 bg-white overflow-y-auto transition-opacity duration-200 ${
+        className={`lg:hidden fixed inset-x-0 top-24 bottom-0 z-40 bg-white overflow-y-auto transition-opacity duration-200 ${
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -176,6 +178,6 @@ export default function Navbar() {
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
-    </header>
+    </>
   );
 }
