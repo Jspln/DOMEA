@@ -21,6 +21,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string>("accueil");
 
+  // Barre opaque blanche dès qu'on a scrollé OU que le menu mobile est ouvert
+  const solid = scrolled || open;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -68,8 +71,8 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-orange-100/60 shadow-sm"
+        solid
+          ? "bg-white/95 backdrop-blur-xl border-b border-orange-100/60 shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -123,7 +126,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className={`lg:hidden p-2 -mr-2 rounded-lg transition-colors ${scrolled ? "text-gray-700 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
+            className={`lg:hidden p-2 -mr-2 rounded-lg transition-colors ${solid ? "text-gray-700 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -135,10 +138,10 @@ export default function Navbar() {
 
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white transition-all duration-300 ${
+        className={`lg:hidden fixed inset-x-0 top-24 bottom-0 bg-white overflow-y-auto transition-opacity duration-200 ${
           open
-            ? "opacity-100 pointer-events-auto translate-y-0"
-            : "opacity-0 pointer-events-none -translate-y-4"
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="px-4 py-6 flex flex-col gap-1">
